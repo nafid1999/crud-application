@@ -37,12 +37,13 @@ function Contacts() {
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card text-center">
-                        <div className="card-header"><h3>React Component in Laravel</h3>
+                        <div className="card-header"><h3>Lists of Contacts</h3>
 
-                            <Link to="/AddContact" className="btn btn-primary float-right mt-0">AJOUTER</Link>
                         </div>
 
                         <div className="card-body">
+                        <Link to="/AddContact" className="btn btn-primary float-left mt-0 mb-4">AJOUTER</Link>
+
                                 <table className="table table-striped">
                                             <thead>
                                                     <tr>

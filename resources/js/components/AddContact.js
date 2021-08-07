@@ -42,7 +42,7 @@ const onSubmit=(e) =>{
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
-                <div className="col-md-8">
+                <div className="col-md-9">
                     <div className="card ">
                         <div className="card-header"><h3>Add a new Contact</h3>
                         <Link to="/" className="btn btn-dark float-right mt-0">BACK</Link>
