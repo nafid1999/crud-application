@@ -29,8 +29,3 @@ Route::get('/contact/{id}/edit ',[ContactController::class,'edit']);
 Route::put('/contact/{id}/edit',[ContactController::class,'update']);
 Route::delete('/contact/{id}/delete',[ContactController::class,'destroy']);
 
-// Route::post("create-student","StudentController@createStudent");
-
-// Route::get("students", "StudentController@studentsListing");
-
-// Route::get("student/{id}", "StudentController@studentDetail");
