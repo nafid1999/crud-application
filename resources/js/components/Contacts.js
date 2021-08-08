@@ -8,7 +8,8 @@ function Contacts() {
 
      //DECLARE STATES
     const [contacts,setContact] = useState([])
-   
+    const [success,setSuccess]=useState('');
+
     // HAS ROL OF DidMountFunction
     useEffect( ()=>{
 
@@ -29,13 +30,44 @@ function Contacts() {
 
          let conts=contacts.filter(contact=>contact.id!==id)
          setContact(conts)
-
-         axios.delete(`/api/contact/${id}/delete`).then(response=>{console.log(response.data)})
+         if(window.confirm("are you sure,you want to delete this record !"))
+            axios.delete(`/api/contact/${id}/delete`).then(response=>{
+                if(response.data.status===200)
+                   setSuccess(true)
+            }).catch(err=>{
+                setSuccess(false)
+            })
+    
          }
+
+         const alertSuccess=()=>{
+
+            setTimeout(()=>{
+                setSuccess('')
+            },4000)
+           return <div className="alert alert-success">Contact deleted successfully.</div>
+        
+        }
+        const alertDanger=()=>{
+        
+            setTimeout(()=>{
+                setSuccess('')
+            },4000)
+           return <div className="alert alert-danger">Contact not deleted ,try again.</div>
+        
+        }
+        
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
+
                 <div className="col-md-8">
+                     {success===true && 
+                    alertSuccess()
+                    }  
+                    {success===false && 
+                        alertDanger()
+                    } 
                     <div className="card text-center">
                         <div className="card-header"><h3>Lists of Contacts</h3>
 

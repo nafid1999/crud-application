@@ -12,6 +12,7 @@ export const EditContact = (props) => {
      */
     const [name,setName]=useState('');
     const [phone,setPhone]=useState('');
+    const [success,setSuccess]=useState('');
     const history = useHistory();
     const {id} =useParams();
 
@@ -50,17 +51,41 @@ const onSubmit=(e) =>{
     const data = { name: name, tel: phone };
     //persist  modification in data base
     axios.put(`/api/contact/${id}/edit`,data ).then(res=>{
-        console.log(res.data)
-        history.push('/')
+        if(res.data.status===200)
+        setSuccess(true)}).catch(err=>{
+            setSuccess(false)
         })
 
 }
 
+const alertSuccess=()=>{
+
+    setTimeout(()=>{
+        setSuccess('')
+        history.push("/")
+    },4000)
+   return <div className="alert alert-success">Contact Edited successfully</div>
+
+}
+const alertDanger=()=>{
+
+    setTimeout(()=>{
+        setSuccess('')
+    },4000)
+   return <div className="alert alert-danger">Contact not edited.</div>
+
+}
 
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-8">
+                    {success===true && 
+                    alertSuccess()
+                    }  
+                    {success===false && 
+                        alertDanger()
+                    } 
                     <div className="card ">
                         <div className="card-header"><h3> Edit contact of: <strong> {name} </strong>  </h3>
                         <Link to="/" className="btn btn-dark float-right mt-0">BACK</Link>

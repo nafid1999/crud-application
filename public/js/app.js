@@ -2004,6 +2004,11 @@ var AddContact = function AddContact(_ref) {
       phone = _useState4[0],
       setPhone = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      success = _useState6[0],
+      setSuccess = _useState6[1];
+
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
   /**
    * EVENET HANDLER
@@ -2027,8 +2032,30 @@ var AddContact = function AddContact(_ref) {
       tel: phone
     };
     axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/contact/create", data).then(function (res) {
-      console.log(res.data);
-      history.push('/');
+      if (res.data.status === 200) setSuccess(true);
+    })["catch"](function (err) {
+      setSuccess(false);
+    });
+  };
+
+  var alertSuccess = function alertSuccess() {
+    setTimeout(function () {
+      setSuccess('');
+      history.push("/");
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "alert alert-success",
+      children: "Contact added successfully."
+    });
+  };
+
+  var alertDanger = function alertDanger() {
+    setTimeout(function () {
+      setSuccess('');
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "alert alert-danger",
+      children: "Contact not added ,try again."
     });
   };
 
@@ -2036,9 +2063,9 @@ var AddContact = function AddContact(_ref) {
     className: "container mt-5",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "row justify-content-center",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "col-md-9",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [success === true && alertSuccess(), success === false && alertDanger(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "card ",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "card-header",
@@ -2095,7 +2122,7 @@ var AddContact = function AddContact(_ref) {
               })]
             })
           })]
-        })
+        })]
       })
     })
   });
@@ -2198,7 +2225,12 @@ function Contacts() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       contacts = _useState2[0],
-      setContact = _useState2[1]; // HAS ROL OF DidMountFunction
+      setContact = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      success = _useState4[0],
+      setSuccess = _useState4[1]; // HAS ROL OF DidMountFunction
 
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -2219,8 +2251,30 @@ function Contacts() {
       return contact.id !== id;
     });
     setContact(conts);
-    axios__WEBPACK_IMPORTED_MODULE_2___default().delete("/api/contact/".concat(id, "/delete")).then(function (response) {
-      console.log(response.data);
+    if (window.confirm("are you sure,you want to delete this record !")) axios__WEBPACK_IMPORTED_MODULE_2___default().delete("/api/contact/".concat(id, "/delete")).then(function (response) {
+      if (response.data.status === 200) setSuccess(true);
+    })["catch"](function (err) {
+      setSuccess(false);
+    });
+  };
+
+  var alertSuccess = function alertSuccess() {
+    setTimeout(function () {
+      setSuccess('');
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "alert alert-success",
+      children: "Contact deleted successfully."
+    });
+  };
+
+  var alertDanger = function alertDanger() {
+    setTimeout(function () {
+      setSuccess('');
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "alert alert-danger",
+      children: "Contact not deleted ,try again."
     });
   };
 
@@ -2228,9 +2282,9 @@ function Contacts() {
     className: "container mt-5",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "row justify-content-center",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "col-md-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: [success === true && alertSuccess(), success === false && alertDanger(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "card text-center",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "card-header",
@@ -2265,7 +2319,7 @@ function Contacts() {
               })]
             })]
           })]
-        })
+        })]
       })
     })
   });
@@ -2325,6 +2379,11 @@ var EditContact = function EditContact(props) {
       phone = _useState4[0],
       setPhone = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      success = _useState6[0],
+      setSuccess = _useState6[1];
+
   var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useHistory)();
 
   var _useParams = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)(),
@@ -2366,8 +2425,30 @@ var EditContact = function EditContact(props) {
     }; //persist  modification in data base
 
     axios__WEBPACK_IMPORTED_MODULE_1___default().put("/api/contact/".concat(id, "/edit"), data).then(function (res) {
-      console.log(res.data);
-      history.push('/');
+      if (res.data.status === 200) setSuccess(true);
+    })["catch"](function (err) {
+      setSuccess(false);
+    });
+  };
+
+  var alertSuccess = function alertSuccess() {
+    setTimeout(function () {
+      setSuccess('');
+      history.push("/");
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "alert alert-success",
+      children: "Contact Edited successfully"
+    });
+  };
+
+  var alertDanger = function alertDanger() {
+    setTimeout(function () {
+      setSuccess('');
+    }, 4000);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "alert alert-danger",
+      children: "Contact not edited."
     });
   };
 
@@ -2375,9 +2456,9 @@ var EditContact = function EditContact(props) {
     className: "container mt-5",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "row justify-content-center",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "col-md-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [success === true && alertSuccess(), success === false && alertDanger(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "card ",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "card-header",
@@ -2436,7 +2517,7 @@ var EditContact = function EditContact(props) {
               })]
             })
           })]
-        })
+        })]
       })
     })
   });

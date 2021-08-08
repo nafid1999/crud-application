@@ -34,7 +34,7 @@ class ContactController extends Controller
             "tel"=>$request->tel
         ]);
 
-        return response()->json($contact);
+        return response()->json(['data'=>$contact,"message"=>"data created","status"=>200]);
     }
 
 
@@ -66,7 +66,7 @@ class ContactController extends Controller
             "tel"=>$request->tel
         ]);
 
-        return response()->json($contact);
+        return response()->json(['data'=>$contact,"message"=>"data created","status"=>200]);
     }
 
     /**
@@ -78,7 +78,7 @@ class ContactController extends Controller
     public function destroy($id)
     {
         $contact=Contact::find($id)->delete();
-        return response()->json($contact);
+        return response()->json(['data'=>$contact,"message"=>"data created","status"=>200]);
 
     }
 }
