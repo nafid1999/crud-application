@@ -1,9 +1,17 @@
 
-import React from 'react'
+import React,{useEffect} from 'react'
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom'
 
 
 export const Contact = ({contact,onDelete}) => {
+
+
+    useEffect(() => {
+        
+        return () => {
+            console.log("componnet will unmount")
+        }
+    }, [])
     return (
         <tr >
             <td>{contact.name}</td> 

@@ -29,6 +29,14 @@ export const EditContact = (props) => {
       })
        
     }, [])
+
+    useEffect(() => {
+    console.log("update name")
+       
+    },[name])
+
+
+ 
     
 /**
  * EVENET HANDLER

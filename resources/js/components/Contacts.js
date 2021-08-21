@@ -8,14 +8,14 @@ function Contacts() {
 
      //DECLARE STATES
     const [contacts,setContact] = useState([])
-    const [success,setSuccess]=useState('');
+    const [success,setSuccess]=useState();
 
     // HAS ROL OF DidMountFunction
     useEffect( ()=>{
 
       axios.get('/api/contacts/').then(response=>{
         //  setContact([...response.data])
-         console.log(response.data)
+         console.log("didmount")
          setContact([...response.data])
       }).catch(err=>{
             console.log(err)}
@@ -23,6 +23,9 @@ function Contacts() {
        
      },[]);
 
+     
+
+  
     /**
      * DELETE CONTACT FROM DOM
      * */ 
@@ -30,7 +33,7 @@ function Contacts() {
 
          let conts=contacts.filter(contact=>contact.id!==id)
          setContact(conts)
-         if(window.confirm("are you sure,you want to delete this record !"))
+         if(window.confirm("are you sure,you want to delete this record "))
             axios.delete(`/api/contact/${id}/delete`).then(response=>{
                 if(response.data.status===200)
                    setSuccess(true)

@@ -2153,6 +2153,11 @@ var _this = undefined;
 var Contact = function Contact(_ref) {
   var contact = _ref.contact,
       onDelete = _ref.onDelete;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    return function () {
+      console.log("componnet will unmount");
+    };
+  }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
       children: contact.name
@@ -2227,7 +2232,7 @@ function Contacts() {
       contacts = _useState2[0],
       setContact = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
       _useState4 = _slicedToArray(_useState3, 2),
       success = _useState4[0],
       setSuccess = _useState4[1]; // HAS ROL OF DidMountFunction
@@ -2236,7 +2241,7 @@ function Contacts() {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/contacts/').then(function (response) {
       //  setContact([...response.data])
-      console.log(response.data);
+      console.log("didmount");
       setContact(_toConsumableArray(response.data));
     })["catch"](function (err) {
       console.log(err);
@@ -2251,7 +2256,7 @@ function Contacts() {
       return contact.id !== id;
     });
     setContact(conts);
-    if (window.confirm("are you sure,you want to delete this record !")) axios__WEBPACK_IMPORTED_MODULE_2___default().delete("/api/contact/".concat(id, "/delete")).then(function (response) {
+    if (window.confirm("are you sure,you want to delete this record ")) axios__WEBPACK_IMPORTED_MODULE_2___default().delete("/api/contact/".concat(id, "/delete")).then(function (response) {
       if (response.data.status === 200) setSuccess(true);
     })["catch"](function (err) {
       setSuccess(false);
@@ -2402,6 +2407,9 @@ var EditContact = function EditContact(props) {
       console.error(arr);
     });
   }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("update name");
+  }, [name]);
   /**
    * EVENET HANDLER
   */
